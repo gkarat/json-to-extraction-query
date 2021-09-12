@@ -48,9 +48,9 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      templateContent: ({ htmlWebpackPlugin }) => `<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>${htmlWebpackPlugin.options.title}</title></head><body><div id=\"app\"></div></body></html>`,
-      filename: 'index.html',
-      title: 'App'
+      template: './src/index.html',
+      hash: true,
+      title: 'Prototype'
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',

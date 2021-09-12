@@ -1,0 +1,7 @@
+*.css
+*.svg
+node_modules
+dist
+coverage
+.eslintrc.js
+webpack.config.js
