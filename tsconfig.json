@@ -10,8 +10,12 @@
         "target": "es5",
         "allowJs": true,
         "jsx": "react",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "typeRoots": [ "./types", "./node_modules/@types"]
     },
     "include": [
         "./src/**/*"
-    ]
+    ],
+    "exclude": ["node_modules", "typings"]
 }

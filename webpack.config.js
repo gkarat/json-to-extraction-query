@@ -30,6 +30,13 @@ const config = {
         use: 'babel-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
     ],
   },
   resolve: {
@@ -38,6 +45,7 @@ const config = {
       '.jsx',
       '.tsx',
       '.ts',
+      '.css'
     ],
     alias: {
       'react-dom': '@hot-loader/react-dom',
