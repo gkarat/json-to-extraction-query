@@ -1,0 +1,12 @@
+html, body {
+    height: 100vh;
+    margin:0;
+}
+
+#app, main, main > div {
+    height: 100%;
+}
+
+.jsoneditor-field {
+    cursor: pointer;
+}
