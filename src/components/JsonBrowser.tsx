@@ -21,17 +21,18 @@ const JsonBrowser = ({ json }: JsonBrowserProps): React.ReactElement<JsonBrowser
         const options =
         {
             mode: 'view' as JSONEditorMode,
+            modes: ['tree', 'view', 'form', 'code', 'text', 'preview'] as JSONEditorMode[],
             name: 'Insights Archive',
             onEvent: (node: EditableNode, event: string) => {
                 // @ts-ignore: Wrong type for 'event' in @types/jsoneditor
                 if ((event).type === 'click') {
+                    console.log(node);
                     dispatch(updatePathSelection(node.path.join('/')));
                 }
             }
         };
 
-        jsoneditor = new JSONEditor(container, options);
-        jsoneditor.set(json);
+        jsoneditor = new JSONEditor(container, options, json);
 
         return () => {
             jsoneditor.destroy();
