@@ -1,14 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 
-import { jsonBrowserSlice } from './jsonBrowserSlice';
-import { pathSelectionSlice } from './pathSelectionSlice';
-import { columnSelectionSlice } from './columnSelectionSlice';
+import browserReducer from './browserSlice';
+import pathReducer from './pathSlice';
+import columnsRedicer from './columnsSlice';
 
 const store = configureStore({
   reducer: {
-    jsonBrowser: jsonBrowserSlice.reducer,
-    pathSelection: pathSelectionSlice.reducer,
-    columnSelection: columnSelectionSlice.reducer,
+    browser: browserReducer,
+    path: pathReducer,
+    columns: columnsRedicer,
   },
 });
 

@@ -1,0 +1,1 @@
+export const SUBMIT_QUERY_EVENT_NAME = 'query-submitted';

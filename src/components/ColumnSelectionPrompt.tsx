@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { deferColumnSelection, selectColumnSelectionSubmitted, submitColumnSelection, updateColumnSelection } from '../redux/columnSelectionSlice';
+import { deferColumnSelection, selectColumnSelectionSubmitted, submitColumnSelection, updateColumnSelection } from '../redux/columnsSlice';
 
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { selectPathSelectionSubmitted } from '../redux/pathSelectionSlice';
+import { selectPathSelectionSubmitted } from '../redux/pathSlice';
 
 const ColumnSelectionPrompt = (): React.ReactElement => {
     const dispatch = useAppDispatch();
