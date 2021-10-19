@@ -4,24 +4,31 @@ import data from '../public/data.json';
 import JsonBrowser from './JsonBrowser';
 import PathSelectionPrompt from './PathSelectionPrompt';
 import ColumnSelectionPrompt from './ColumnSelectionPrompt';
-import { useAppSelector } from '../redux/hooks';
-import { selectPathSubmitted, selectPathValue } from '../redux/pathSlice';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import {
-  selectColumnsSubmitted,
-  selectColumnSelectionValue,
+  selectSubmitted as selectPathSubmitted,
+  selectJsonPath,
+  submitPath,
+  deferPath,
+  resetPath,
+} from '../redux/pathSlice';
+import {
+  selectSubmitted as selectColumnsSubmitted,
+  selectColumnsValue,
 } from '../redux/columnsSlice';
 import { SUBMIT_QUERY_EVENT_NAME } from '../AppConstants';
 
 const Main = (): React.ReactElement => {
-  const pathSubmitted = useAppSelector(selectPathSelectionSubmitted);
+  const dispatch = useAppDispatch();
+  const pathSubmitted = useAppSelector(selectPathSubmitted);
   const columnsSubmitted = useAppSelector(selectColumnsSubmitted);
-  const pathValue = useAppSelector(selectPathValue);
-  const columnSelectionValue = useAppSelector(selectColumnSelectionValue);
+  const path = useAppSelector(selectJsonPath);
+  const columns = useAppSelector(selectColumnsValue);
   const submitQueryButton = document.querySelector('#submit-query-button');
   const event = new CustomEvent(SUBMIT_QUERY_EVENT_NAME, {
     detail: {
-      pathSelectionValue,
-      columnSelectionValue,
+      path,
+      columns,
     },
   });
   submitQueryButton?.addEventListener(SUBMIT_QUERY_EVENT_NAME, (e) => {
@@ -48,15 +55,37 @@ const Main = (): React.ReactElement => {
         >
           <JsonBrowser json={data} />
         </div>
-        <div style={{ gridArea: '1 / 2 / 2 / 3', padding: '1rem' }}>
+        <div
+          style={{
+            gridArea: '1 / 2 / 2 / 3',
+            position: 'relative',
+            padding: '1rem',
+          }}
+        >
           <PathSelectionPrompt />
+          <div style={{ position: 'absolute', bottom: '1rem' }}>
+            <button
+              type="button"
+              style={{ width: '100px', marginRight: '10px' }}
+              onClick={() => dispatch(submitPath())}
+            >
+              Submit
+            </button>
+            <button
+              type="reset"
+              style={{ width: '100px' }}
+              onClick={() => dispatch(resetPath())}
+            >
+              Reset
+            </button>
+          </div>
         </div>
         <div style={{ gridArea: '2 / 2 / 3 / 4', padding: '1rem' }}>
-          <ColumnSelectionPrompt />
+          {/*<ColumnSelectionPrompt />*/}
           <button
             id="submit-query-button"
             style={{ width: '100px', position: 'absolute', bottom: '30px' }}
-            disabled={!pathSelectionSubmitted || !columnSelectionSubmitted}
+            disabled={!pathSubmitted || !columnsSubmitted}
             onClick={(e) => {
               e.target.dispatchEvent(event);
             }}

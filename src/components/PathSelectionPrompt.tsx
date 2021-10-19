@@ -1,54 +1,47 @@
 import * as React from 'react';
 
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { disableBrowser, enableBrowser } from '../redux/browserSlice';
-import {
-  deferPath,
-  selectSubmitted,
-  selectNodes,
-  submitPath,
-  updateNodes,
-} from '../redux/pathSlice';
+import { selectNodes, selectSubmitted, updateNodes } from '../redux/pathSlice';
+import Chip from './Chip/Chip';
 
 const PathSelectionPrompt = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const pathNodes = useAppSelector(selectNodes);
-  const pathSelectionSubmitted = useAppSelector(selectSubmitted);
-  const handleOnInput = (e: React.FormEvent) => {
-    dispatch(disableBrowser());
-  };
+  const pathSubmitted = useAppSelector(selectSubmitted);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <h3>Path selection prompt</h3>
-      <textarea
-        id="pathSelectionPromptInput"
-        onInput={handleOnInput}
-        value={pathSelection}
-        style={{
-          width: 'min(100%, 700px)',
-          height: '100px',
-          resize: 'none',
-          marginBottom: '1rem',
-        }}
-        disabled={pathSelectionSubmitted}
-      />
-      <div>
-        <button
-          type="button"
-          style={{ width: '100px', marginRight: '10px' }}
-          onClick={() => dispatch(submitPath())}
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+      {pathNodes.map((n, i) => (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+          key={i}
         >
-          Submit
-        </button>
-        <button
-          type="reset"
-          style={{ width: '100px' }}
-          onClick={() => dispatch(deferPath())}
-        >
-          Reset
-        </button>
-      </div>
+          <Chip
+            value={String(n)}
+            onEdit={(e) => {
+              e.preventDefault();
+              const nodes: Array<string | number> = [...pathNodes];
+              nodes[i] = (e.target as HTMLSpanElement).innerHTML;
+              dispatch(updateNodes(nodes));
+            }}
+            onDelete={(e) => {
+              e.preventDefault();
+              const nodes: Array<string | number> = [...pathNodes];
+              nodes.splice(i, 1);
+              dispatch(updateNodes(nodes));
+            }}
+            editable={!pathSubmitted}
+          />
+          {pathNodes.length !== 1 && i !== pathNodes.length - 1 ? (
+            <span>/</span>
+          ) : (
+            ''
+          )}
+        </div>
+      ))}
     </div>
   );
 };

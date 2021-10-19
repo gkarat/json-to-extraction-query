@@ -8,8 +8,14 @@ import JSONEditor, {
 import 'jsoneditor/dist/jsoneditor.css';
 
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { selectNodes, updateNodes } from '../redux/pathSlice';
+import {
+  fromNodesToJsonPath,
+  selectNodes,
+  selectSubmitted as selectPathSubmitted,
+  updateNodes,
+} from '../redux/pathSlice';
 import { enableBrowser, selectBrowserDisabled } from '../redux/browserSlice';
+import { JSONPath } from 'jsonpath-plus';
 
 interface JsonBrowserProps {
   json: Record<string, unknown>;
@@ -24,7 +30,8 @@ const JsonBrowser = ({
 }: JsonBrowserProps): React.ReactElement<JsonBrowserProps> => {
   const dispatch = useAppDispatch();
   const disabled = useAppSelector(selectBrowserDisabled);
-  const jsonPath = useAppSelector(selectNodes);
+  const pathNodes = useAppSelector(selectNodes);
+  const pathSubmitted = useAppSelector(selectPathSubmitted);
 
   let jsoneditor: JSONEditor;
   let container: HTMLElement;
@@ -49,9 +56,9 @@ const JsonBrowser = ({
       onClassName: ({ path, field, value }) => {
         if (
           Array.isArray(path) &&
-          Array.isArray(jsonPath) &&
-          path.length === jsonPath.length &&
-          jsonPath.every((val, index) => val === path[index])
+          Array.isArray(pathNodes) &&
+          path.length === pathNodes.length &&
+          pathNodes.every((val, index) => val === path[index])
         ) {
           // console.log(path)
           return 'test';
@@ -65,25 +72,33 @@ const JsonBrowser = ({
       ) => {
         // console.log(start, end, text);
       },
-      // @ts-ignore: Wrong type for 'event' in @types/jsoneditor
-      onEvent: (node: EditableNode, event: Event) => {
+      onEvent: (node: EditableNode, event: any) => {
         if (event.type === 'click') {
           dispatch(updateNodes(node.path));
         }
       },
     };
-    jsoneditor = new JSONEditor(container, options, json);
+
+    if (pathSubmitted) {
+      jsoneditor = new JSONEditor(
+        container,
+        options,
+        JSONPath({ path: fromNodesToJsonPath(pathNodes), json: json })
+      );
+    } else {
+      jsoneditor = new JSONEditor(container, options, json);
+    }
     return () => {
       jsoneditor.destroy();
     };
-  }, []);
+  }, [pathSubmitted]);
 
   useEffect(() => {
     console.log(jsoneditor);
     if (jsoneditor) {
       //jsoneditor.refresh();
     }
-  }, [jsonPath]);
+  }, [pathNodes]);
 
   return (
     <div
@@ -94,11 +109,6 @@ const JsonBrowser = ({
         opacity: disabled ? '0.5' : '1',
       }}
       ref={(elem) => (container = elem as HTMLDivElement)}
-      onClick={() => {
-        if (disabled) {
-          dispatch(enableBrowser());
-        }
-      }}
     />
   );
 };

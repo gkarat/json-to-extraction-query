@@ -16,7 +16,7 @@ const initialState: PathState = {
   submitted: false,
 };
 
-const fromNodesToJsonPath = (nodes: Array<string | number>) => {
+export const fromNodesToJsonPath = (nodes: Array<string | number>) => {
   return '$.' + nodes.map((n) => `[${n}]`).join('.');
 };
 
@@ -36,7 +36,7 @@ export const pathSlice = createSlice({
       state.submitted = false;
     },
     resetPath: (state) => {
-      state = { ...initialState };
+      Object.assign(state, initialState);
     },
   },
 });

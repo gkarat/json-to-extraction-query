@@ -34,6 +34,5 @@ export const columnsSlice = createSlice({
 export const { updateColumns, submitColumns, deferColumns } =
   columnsSlice.actions;
 export const selectColumnsValue = (state: RootState) => state.columns.value;
-export const selectColumnsSubmitted = (state: RootState) =>
-  state.columns.submitted;
+export const selectSubmitted = (state: RootState) => state.columns.submitted;
 export default columnsSlice.reducer;
