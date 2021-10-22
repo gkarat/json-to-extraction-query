@@ -27,13 +27,19 @@ const Chip = ({
         marginRight: '0.5rem',
       }}
     >
-      <span
-        className="chip__editable"
-        contentEditable={editable}
+      <input
+        list="chip-options"
+        name="chip"
+        value={value}
         onInput={onEdit}
-      >
-        {value}
-      </span>
+        style={{ width: 'fit-content' }}
+        type="search"
+      />
+      <datalist id="chip-options">
+        <option value="*">(select all)</option>
+        <option value="[a, b, c]">(select indices/keys)</option>
+        <option value="a">(select index/key)</option>
+      </datalist>
       <button
         name="delete-chip"
         disabled={!onDelete || !editable}

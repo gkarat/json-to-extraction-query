@@ -17,7 +17,10 @@ const initialState: PathState = {
 };
 
 export const fromNodesToJsonPath = (nodes: Array<string | number>) => {
-  return '$.' + nodes.map((n) => `[${n}]`).join('.');
+  return (
+    '$.' +
+    nodes.map((n) => ((n as string).includes('.') ? `[${n}]` : n)).join('.')
+  );
 };
 
 export const pathSlice = createSlice({

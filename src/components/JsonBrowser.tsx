@@ -1,114 +1,69 @@
-import React, { useEffect } from 'react';
-import JSONEditor, {
-  EditableNode,
-  FieldEditable,
-  JSONEditorMode,
-  SelectionPosition,
-} from 'jsoneditor';
+import React, { useEffect, useState } from 'react';
+import JSONEditor, { EditableNode, JSONEditorMode } from 'jsoneditor';
 import 'jsoneditor/dist/jsoneditor.css';
 
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import {
-  fromNodesToJsonPath,
-  selectNodes,
-  selectSubmitted as selectPathSubmitted,
-  updateNodes,
-} from '../redux/pathSlice';
-import { enableBrowser, selectBrowserDisabled } from '../redux/browserSlice';
-import { JSONPath } from 'jsonpath-plus';
+import { updateNodes } from '../redux/pathSlice';
+import { selectBrowserDisabled, selectData } from '../redux/browserSlice';
 
 interface JsonBrowserProps {
   json: Record<string, unknown>;
 }
-
-const translateToJSONPath = (nodes: Array<string | number>): string => {
-  return '$.' + nodes.map((n) => `[${n}]`).join('.');
-};
 
 const JsonBrowser = ({
   json,
 }: JsonBrowserProps): React.ReactElement<JsonBrowserProps> => {
   const dispatch = useAppDispatch();
   const disabled = useAppSelector(selectBrowserDisabled);
-  const pathNodes = useAppSelector(selectNodes);
-  const pathSubmitted = useAppSelector(selectPathSubmitted);
+  const data = useAppSelector(selectData);
 
-  let jsoneditor: JSONEditor;
-  let container: HTMLElement;
+  const [editor, setEditor] = useState<JSONEditor>();
+  const [container, setContainer] = useState<HTMLElement>();
 
-  useEffect(() => {
-    const options = {
-      mode: 'view' as JSONEditorMode,
-      modes: [
-        'tree',
-        'view',
-        'form',
-        'code',
-        'text',
-        'preview',
-      ] as JSONEditorMode[],
-      name: 'Insights Archive',
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      onEditable: (node: object | EditableNode): boolean | FieldEditable => {
-        return false;
-      },
-      // @ts-ignore
-      onClassName: ({ path, field, value }) => {
-        if (
-          Array.isArray(path) &&
-          Array.isArray(pathNodes) &&
-          path.length === pathNodes.length &&
-          pathNodes.every((val, index) => val === path[index])
-        ) {
-          // console.log(path)
-          return 'test';
-        }
-        return undefined;
-      },
-      onTextSelectionChange: (
-        start: SelectionPosition,
-        end: SelectionPosition,
-        text: string
-      ) => {
-        // console.log(start, end, text);
-      },
-      onEvent: (node: EditableNode, event: any) => {
-        if (event.type === 'click') {
-          dispatch(updateNodes(node.path));
-        }
-      },
-    };
-
-    if (pathSubmitted) {
-      jsoneditor = new JSONEditor(
-        container,
-        options,
-        JSONPath({ path: fromNodesToJsonPath(pathNodes), json: json })
-      );
-    } else {
-      jsoneditor = new JSONEditor(container, options, json);
-    }
-    return () => {
-      jsoneditor.destroy();
-    };
-  }, [pathSubmitted]);
+  const options = {
+    mode: 'view' as JSONEditorMode,
+    name: '3976d107-a45e-49fb-935b-1926f16cfd87',
+    /* 
+    onClassName: ({ path, field, value }) => {
+      if (
+        Array.isArray(path) &&
+        Array.isArray(pathNodes) &&
+        path.length === pathNodes.length &&
+        pathNodes.every((val, index) => val === path[index])
+      ) {
+        // console.log(path)
+        return 'test';
+      }
+      return undefined;
+    },
+    onTextSelectionChange: (
+      start: SelectionPosition,
+      end: SelectionPosition,
+      text: string
+    ) => {
+      // console.log(start, end, text);
+    }, */
+    onEvent: (node: EditableNode, event: any) => {
+      if (!disabled && event.type === 'click') {
+        dispatch(updateNodes(node.path));
+      }
+    },
+  };
 
   useEffect(() => {
-    console.log(jsoneditor);
-    if (jsoneditor) {
-      //jsoneditor.refresh();
+    if (container) {
+      editor?.destroy();
+      setEditor(new JSONEditor(container, options, data));
     }
-  }, [pathNodes]);
+  }, [container, data, disabled]);
 
   return (
     <div
       className="jsoneditor-react-container"
       style={{
         height: '100%',
-        pointerEvents: disabled ? 'none' : 'auto',
-        opacity: disabled ? '0.5' : '1',
       }}
-      ref={(elem) => (container = elem as HTMLDivElement)}
+      ref={(elem) => setContainer(elem as HTMLDivElement)}
     />
   );
 };
