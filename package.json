@@ -1,6 +1,6 @@
 {
   "name": "path-generator-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "application provides the UI that translates user selection on JSON files into the special format utilizing JSON Path Plus syntax.",
   "scripts": {
     "build": "webpack --mode=production",
