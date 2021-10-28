@@ -8,6 +8,8 @@ const config = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
+    library: 'JsonToExtractionQuery',
+    libraryTarget: 'commonjs2'
   },
   module: {
     rules: [
