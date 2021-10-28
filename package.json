@@ -1,15 +1,36 @@
 {
-  "name": "path-generator-app",
-  "version": "1.0.1",
-  "description": "application provides the UI that translates user selection on JSON files into the special format utilizing JSON Path Plus syntax.",
+  "name": "json-to-extraction-query",
+  "version": "1.0.3",
+  "description": "GUI that translates manual user selections on imported JSON file into extraction query. The extraction query is a hybrid of JSON Path plus syntax and can be utilized by further services to create a table of extracted values.",
+  "keywords": [
+    "json",
+    "extraction",
+    "table",
+    "JSONPath",
+    "JSONPath Plus",
+    "relation"
+  ],
+  "homepage": "https://github.com/gkarat/json-to-extraction-query",
+  "bugs": {
+    "url": "https://github.com/gkarat/json-to-extraction-query/issues"
+  },
+  "author": {
+    "name": "Georgii Karataev",
+    "email": "jorrtone@gmail.com",
+    "url": "https://github.com/gkarat"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gkarat/json-to-extraction-query.git"
+  },
+  "main": "src/components/QueryGenerator.tsx",
   "scripts": {
     "build": "webpack --mode=production",
     "start": "webpack-dev-server --mode=development --open --hot",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src"
   },
-  "author": "Georgii Karataev",
-  "license": "ISC",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
     "eslint-config-prettier": "^8.3.0",
