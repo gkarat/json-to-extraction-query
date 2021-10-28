@@ -44,6 +44,7 @@ const Main = ({ json }: MainProps): ReactElement => {
   return (
     <main>
       <div
+        id="extraction-main-grid"
         style={{
           display: 'grid',
           gridTemplate: '1fr 1fr / 1fr 1fr',
