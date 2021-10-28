@@ -4,14 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const config = {
-  entry: [
-    'react-hot-loader/patch',
-    './src/index.js',
-  ],
+  entry: './src/index.js',
   devtool: 'source-map',
   output: {
+    filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -32,21 +29,12 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
   resolve: {
-    extensions: [
-      '.js',
-      '.jsx',
-      '.tsx',
-      '.ts',
-      '.css'
-    ],
+    extensions: ['.js', '.jsx', '.tsx', '.ts', '.css'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
     },
@@ -58,13 +46,16 @@ const config = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       hash: true,
-      title: 'Prototype'
+      title: 'Prototype',
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,
     }),
   ],
+  optimization: {
+    minimize: false,
+  },
 };
 
 module.exports = config;

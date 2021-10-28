@@ -4,4 +4,5 @@ node_modules
 dist
 coverage
 .eslintrc.js
-webpack.config.js
+webpack.dev.js
+webpack.prod.js
