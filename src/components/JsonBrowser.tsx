@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import JSONEditor, { EditableNode, JSONEditorMode } from 'jsoneditor';
 import 'jsoneditor/dist/jsoneditor.css';
 
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { updateNodes } from '../redux/pathSlice';
-import { selectBrowserDisabled, selectData } from '../redux/browserSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { updateNodes } from '../reducers/pathSlice';
+import {
+  selectDisabled as selectBrowserDisabled,
+  selectJson,
+} from '../reducers/browserSlice';
 
-interface JsonBrowserProps {
-  json: Record<string, unknown>;
-}
-
-const JsonBrowser = ({
-  json,
-}: JsonBrowserProps): React.ReactElement<JsonBrowserProps> => {
+const JsonBrowser = (): ReactElement => {
   const dispatch = useAppDispatch();
   const disabled = useAppSelector(selectBrowserDisabled);
-  const data = useAppSelector(selectData);
+  const data = useAppSelector(selectJson);
 
   const [editor, setEditor] = useState<JSONEditor>();
   const [container, setContainer] = useState<HTMLElement>();

@@ -1,25 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { RootState } from './store';
+import type { RootState } from '../store/store';
 
-// Define a type for the slice state
+type ColumnPaths = Array<string>;
+
 interface ColumnsState {
-  paths: Array<string>;
+  paths: ColumnPaths;
   submitted: boolean;
 }
 
-// Define the initial state using that type
-const initialState: ColumnsState = {
+export const initialState: ColumnsState = {
   paths: [],
   submitted: false,
 };
 
 export const columnsSlice = createSlice({
   name: 'columns',
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    updateColumns: (state, action: PayloadAction<Array<string>>) => {
+    updateColumns: (state, action: PayloadAction<ColumnPaths>) => {
       state.paths = action.payload;
     },
     submitColumns: (state) => {
@@ -34,9 +33,15 @@ export const columnsSlice = createSlice({
   },
 });
 
+// actions
 export const { updateColumns, submitColumns, deferColumns, resetColumns } =
   columnsSlice.actions;
-export const selectColumnsPaths = (state: RootState) => state.columns.paths;
-export const selectColumnsSubmitted = (state: RootState) =>
+
+// selectors
+export const selectColumnsPaths = (state: RootState): ColumnPaths =>
+  state.columns.paths;
+export const selectColumnsSubmitted = (state: RootState): boolean =>
   state.columns.submitted;
+
+// reducer
 export default columnsSlice.reducer;

@@ -2,12 +2,12 @@ import { JSONPath } from 'jsonpath-plus';
 import * as React from 'react';
 import {
   disableBrowser,
-  resetBrowser,
-  selectData,
-  updateData,
-} from '../redux/browserSlice';
+  resetJson,
+  selectJson,
+  updateJson,
+} from '../reducers/browserSlice';
 
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   deferPath,
   resetPath,
@@ -16,7 +16,7 @@ import {
   selectSubmitted,
   submitPath,
   updateNodes,
-} from '../redux/pathSlice';
+} from '../reducers/pathSlice';
 import Chip from './Chip/Chip';
 
 const PathSelectionPrompt = (): React.ReactElement => {
@@ -24,10 +24,10 @@ const PathSelectionPrompt = (): React.ReactElement => {
   const pathNodes = useAppSelector(selectNodes);
   const path = useAppSelector(selectJsonPath);
   const pathSubmitted = useAppSelector(selectSubmitted);
-  const data = useAppSelector(selectData);
+  const data = useAppSelector(selectJson);
   const [totalMatch, setTotalMatch] = React.useState(0);
   React.useEffect(() => {
-    setTotalMatch(JSONPath({ path, json: data }).length);
+    setTotalMatch(JSONPath({ path, json: data })?.length || 0);
   }, [path, data]);
   return (
     <div
@@ -93,7 +93,7 @@ const PathSelectionPrompt = (): React.ReactElement => {
           onClick={() => {
             dispatch(submitPath());
             dispatch(disableBrowser());
-            dispatch(updateData(JSONPath({ path, json: data })));
+            dispatch(updateJson(JSONPath({ path, json: data })));
           }}
           disabled={pathSubmitted || (!pathSubmitted && path === '$.')}
         >
@@ -103,7 +103,7 @@ const PathSelectionPrompt = (): React.ReactElement => {
           type="reset"
           onClick={() => {
             dispatch(deferPath());
-            dispatch(resetBrowser());
+            dispatch(resetJson());
           }}
         >
           Defer
@@ -112,7 +112,7 @@ const PathSelectionPrompt = (): React.ReactElement => {
           type="reset"
           onClick={() => {
             dispatch(resetPath());
-            dispatch(resetBrowser());
+            dispatch(resetJson());
           }}
         >
           Reset

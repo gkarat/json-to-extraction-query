@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import browserReducer from './browserSlice';
-import pathReducer from './pathSlice';
-import columnsRedicer from './columnsSlice';
+import browserReducer from '../reducers/browserSlice';
+import pathReducer from '../reducers/pathSlice';
+import columnsReducer from '../reducers/columnsSlice';
 
 const store = configureStore({
   reducer: {
     browser: browserReducer,
     path: pathReducer,
-    columns: columnsRedicer,
+    columns: columnsReducer,
   },
 });
 

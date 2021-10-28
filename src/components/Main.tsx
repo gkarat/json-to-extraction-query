@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
-import data from '../public/data.json';
 import JsonBrowser from './JsonBrowser';
 import PathSelectionPrompt from './PathSelectionPrompt';
 import ColumnSelectionPrompt from './ColumnSelectionPrompt';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   selectSubmitted as selectPathSubmitted,
   selectJsonPath,
-} from '../redux/pathSlice';
+} from '../reducers/pathSlice';
 import {
   selectColumnsSubmitted,
   selectColumnsPaths,
-} from '../redux/columnsSlice';
+} from '../reducers/columnsSlice';
 import { SUBMIT_QUERY_EVENT_NAME } from '../AppConstants';
+import { initJson, JsonData } from '../reducers/browserSlice';
 
-const Main = (): React.ReactElement => {
+interface MainProps {
+  json: JsonData;
+}
+
+const Main = ({ json }: MainProps): ReactElement => {
   const dispatch = useAppDispatch();
   const pathSubmitted = useAppSelector(selectPathSubmitted);
   const columnsSubmitted = useAppSelector(selectColumnsSubmitted);
@@ -32,6 +36,10 @@ const Main = (): React.ReactElement => {
     e.stopImmediatePropagation();
     console.log((e as CustomEvent).detail);
   });
+
+  useEffect(() => {
+    dispatch(initJson(json));
+  }, [json]);
 
   return (
     <main>
@@ -50,7 +58,7 @@ const Main = (): React.ReactElement => {
             padding: '1rem',
           }}
         >
-          <JsonBrowser json={data} />
+          <JsonBrowser />
         </div>
         <div
           style={{

@@ -1,22 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { RootState } from './store';
+import type { RootState } from '../store/store';
 
-// Define a type for the slice state
+type PathNodes = Array<string | number>;
+
 interface PathState {
-  nodes: Array<string | number>;
+  nodes: PathNodes;
   jsonPath: string;
   submitted: boolean;
 }
 
-// Define the initial state using that type
-const initialState: PathState = {
+export const initialState: PathState = {
   nodes: [],
   jsonPath: '$.',
   submitted: false,
 };
 
-export const fromNodesToJsonPath = (nodes: Array<string | number>) => {
+export const fromNodesToJsonPath = (nodes: PathNodes): string => {
   return (
     '$.' +
     nodes.map((n) => ((n as string).includes('.') ? `[${n}]` : n)).join('.')
@@ -25,10 +25,9 @@ export const fromNodesToJsonPath = (nodes: Array<string | number>) => {
 
 export const pathSlice = createSlice({
   name: 'path',
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    updateNodes: (state, action: PayloadAction<Array<string | number>>) => {
+    updateNodes: (state, action: PayloadAction<PathNodes>) => {
       state.nodes = action.payload;
       state.jsonPath = fromNodesToJsonPath(action.payload);
     },
@@ -44,9 +43,15 @@ export const pathSlice = createSlice({
   },
 });
 
+// actions
 export const { updateNodes, submitPath, deferPath, resetPath } =
   pathSlice.actions;
-export const selectJsonPath = (state: RootState) => state.path.jsonPath;
-export const selectNodes = (state: RootState) => state.path.nodes;
-export const selectSubmitted = (state: RootState) => state.path.submitted;
+
+// selectors
+export const selectJsonPath = (state: RootState): string => state.path.jsonPath;
+export const selectNodes = (state: RootState): PathNodes => state.path.nodes;
+export const selectSubmitted = (state: RootState): boolean =>
+  state.path.submitted;
+
+// reducer
 export default pathSlice.reducer;

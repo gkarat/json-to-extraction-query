@@ -1,6 +1,6 @@
 import { JSONPath } from 'jsonpath-plus';
 import * as React from 'react';
-import { selectData, updateData } from '../redux/browserSlice';
+import { selectJson, updateJson } from '../reducers/browserSlice';
 import {
   deferColumns,
   selectColumnsSubmitted,
@@ -8,10 +8,10 @@ import {
   updateColumns,
   resetColumns,
   selectColumnsPaths,
-} from '../redux/columnsSlice';
+} from '../reducers/columnsSlice';
 
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { selectSubmitted as selectPathSubmitted } from '../redux/pathSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { selectSubmitted as selectPathSubmitted } from '../reducers/pathSlice';
 import Chip from './Chip/Chip';
 
 interface ColumnSelectionPromptProps {
@@ -25,7 +25,7 @@ const ColumnSelectionPrompt = ({
   const pathSubmitted = useAppSelector(selectPathSubmitted);
   const columnsSubmitted = useAppSelector(selectColumnsSubmitted);
   const columns = useAppSelector(selectColumnsPaths);
-  const data = useAppSelector(selectData);
+  const data = useAppSelector(selectJson);
 
   return (
     <div>
@@ -95,7 +95,7 @@ const ColumnSelectionPrompt = ({
             dispatch(submitColumns());
             data &&
               dispatch(
-                updateData(
+                updateJson(
                   // @ts-ignore
                   data.map((i: any) => {
                     const cols: any = [];
