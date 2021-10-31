@@ -1,5 +1,5 @@
 import { JSONPath } from 'jsonpath-plus';
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   disableBrowser,
   resetJson,
@@ -25,10 +25,12 @@ const PathSelectionPrompt = (): React.ReactElement => {
   const path = useAppSelector(selectJsonPath);
   const pathSubmitted = useAppSelector(selectSubmitted);
   const data = useAppSelector(selectJson);
-  const [totalMatch, setTotalMatch] = React.useState(0);
-  React.useEffect(() => {
+  const [totalMatch, setTotalMatch] = useState(0);
+
+  useEffect(() => {
     setTotalMatch(JSONPath({ path, json: data })?.length || 0);
   }, [path, data]);
+
   return (
     <div
       style={{

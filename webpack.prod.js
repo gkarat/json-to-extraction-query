@@ -2,14 +2,15 @@ const webpack = require('webpack');
 const path = require('path');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+// build a library (TODO: support prod build of entire app)
 const config = {
-  entry: './src/components/QueryGenerator.tsx',
+  entry: './src/components/App.tsx',
   devtool: 'source-map',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
     library: '$',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
   },
   module: {
     rules: [
@@ -31,6 +32,12 @@ const config = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.svg$/,
+        use: ['file-loader'],
+        exclude: /node_modules/,
+
       },
     ],
   },

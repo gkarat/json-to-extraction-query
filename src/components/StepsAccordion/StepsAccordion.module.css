@@ -1,0 +1,52 @@
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.accordionButton {
+  padding: 0.5rem !important;
+}
+
+.arrowRight {
+  transform: translateX(-1px) rotate(-45deg);
+  -webkit-transform: translateX(-1px) rotate(-45deg);
+}
+
+.arrowDown {
+  transform: translateY(-2px) rotate(45deg);
+  -webkit-transform: translateY(-2px) rotate(45deg);
+}
+
+.accHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hint {
+  width: 15px;
+}
+
+.hint:hover {
+  cursor: pointer;
+  /* first two filters aim to reset svg color to black */
+  filter: brightness(0) saturate(100%) brightness(90%);
+}
+
+.hintSummary {
+  height: 15px;
+}

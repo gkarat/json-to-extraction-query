@@ -13,13 +13,13 @@ export type JsonData =
 interface BrowserState {
   disabled: boolean;
   initJson: JsonData;
-  json: JsonData;
+  currentJson: JsonData;
 }
 
 export const initialState: BrowserState = {
   disabled: false,
   initJson: null,
-  json: null,
+  currentJson: null,
 };
 
 export const browserSlice = createSlice({
@@ -33,14 +33,14 @@ export const browserSlice = createSlice({
       state.disabled = true;
     },
     updateJson: (state, action: PayloadAction<JsonData>) => {
-      state.json = action.payload;
+      state.currentJson = action.payload;
     },
     resetJson: (state) => {
-      state.json = state.initJson;
+      state.currentJson = state.initJson;
     },
     initJson: (state, action: PayloadAction<JsonData>) => {
       state.initJson = action.payload;
-      state.json = action.payload;
+      state.currentJson = action.payload;
     },
   },
 });
@@ -55,7 +55,8 @@ export const {
 } = browserSlice.actions;
 
 // selectors
-export const selectJson = (state: RootState): JsonData => state.browser.json;
+export const selectJson = (state: RootState): JsonData =>
+  state.browser.currentJson;
 export const selectDisabled = (state: RootState): boolean =>
   state.browser.disabled;
 

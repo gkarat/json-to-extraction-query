@@ -1,0 +1,36 @@
+import styles from './Main.module.css';
+
+import React, { FC, useEffect } from 'react';
+
+import { useAppDispatch } from '../../store/hooks';
+import { initJson, JsonData } from '../../reducers/browserSlice';
+
+import JsonBrowser from '../JsonBrowser';
+import StepsAccordion from '../StepsAccordion';
+
+interface MainProps {
+  json: JsonData;
+}
+
+const Main: FC<MainProps> = ({ json }) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(initJson(json));
+  }, [json]);
+
+  return (
+    <main>
+      <div id="app-grid" className={styles.mainGrid}>
+        <div id="app-json-browser" className={styles.browserContainer}>
+          <JsonBrowser />
+        </div>
+        <div id="app-steps" className={styles.stepsContainer}>
+          <StepsAccordion />
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default Main;

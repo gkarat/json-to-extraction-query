@@ -32,6 +32,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
+    "@reach/accordion": "^0.16.1",
     "@reduxjs/toolkit": "^1.6.1",
     "jsoneditor": "^9.5.5",
     "jsonpath-plus": "^6.0.1",
@@ -60,13 +61,14 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
     "prettier": "^2.4.1",
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.2.1",
     "ts-loader": "^9.2.5",
     "typescript": "^4.4.3",
-    "webpack": "^5.52.1",
+    "typescript-plugin-css-modules": "^3.4.0",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.2.0"

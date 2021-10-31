@@ -1,0 +1,22 @@
+input {
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  width: fit-content;
+  border-radius: 5px;
+  margin-right: 0.5rem;
+}
+
+.delete {
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}

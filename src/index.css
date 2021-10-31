@@ -1,12 +1,80 @@
-html, body {
-    height: 100vh;
-    margin:0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-#app, main, main > div {
-    height: 100%;
+html,
+body {
+  height: 100vh;
+  margin: 0;
 }
-
+* {
+  font-family: 'Roboto' !important;
+  transition: 0.05s;
+}
+#app,
+main,
+main > div {
+  height: 100%;
+}
 .jsoneditor-field {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+#app-steps button {
+  display: flex;
+  align-items: flex-start;
+  padding: 5px 15px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+#app-steps button:hover {
+  background: rgb(196, 196, 196);
+}
+#app-steps .hidden {
+  display: none;
+}
+
+/* popover */
+details[data-popover] {
+  display: inline;
+  position: relative;
+}
+
+details[data-popover] > summary {
+  list-style: none;
+}
+details[data-popover] > summary + * {
+  position: absolute;
+  display: block;
+  z-index: 1;
+  border: solid 1px #d1d1d1;
+  border-radius: 5%;
+  padding: 0 20px;
+  background: white;
+  width: 300px;
+}
+details[data-popover] > * + * {
+  /* hide detail elements that would ruin the popover */
+  display: none;
+}
+details[data-popover='up'] > summary + * {
+  bottom: calc(0.5rem + 100%);
+  right: 50%;
+  transform: translateX(50%);
+}
+details[data-popover='down'] > summary + * {
+  top: calc(0.5rem + 100%);
+  right: 50%;
+  transform: translateX(50%);
+}
+details[data-popover='left'] > summary + * {
+  right: calc(1rem + 100%);
+  bottom: 50%;
+  transform: translateY(50%);
+}
+details[data-popover='right'] > summary + * {
+  left: calc(1rem + 100%);
+  bottom: 50%;
+  transform: translateY(50%);
 }

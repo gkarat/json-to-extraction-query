@@ -8,12 +8,15 @@ interface PathState {
   nodes: PathNodes;
   jsonPath: string;
   submitted: boolean;
+  // stands for collapsing related accordion item
+  open: boolean;
 }
 
 export const initialState: PathState = {
   nodes: [],
   jsonPath: '$.',
   submitted: false,
+  open: true,
 };
 
 export const fromNodesToJsonPath = (nodes: PathNodes): string => {
@@ -40,11 +43,14 @@ export const pathSlice = createSlice({
     resetPath: (state) => {
       Object.assign(state, initialState);
     },
+    toggleOpen: (state) => {
+      state.open = !state.open;
+    },
   },
 });
 
 // actions
-export const { updateNodes, submitPath, deferPath, resetPath } =
+export const { updateNodes, submitPath, deferPath, resetPath, toggleOpen } =
   pathSlice.actions;
 
 // selectors
@@ -52,6 +58,7 @@ export const selectJsonPath = (state: RootState): string => state.path.jsonPath;
 export const selectNodes = (state: RootState): PathNodes => state.path.nodes;
 export const selectSubmitted = (state: RootState): boolean =>
   state.path.submitted;
+export const selectOpen = (state: RootState): boolean => state.path.open;
 
 // reducer
 export default pathSlice.reducer;
