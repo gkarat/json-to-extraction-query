@@ -1,3 +1,5 @@
+import './index.scss';
+
 import React, { FC } from 'react';
 import { Accordion } from '@reach/accordion';
 

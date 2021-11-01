@@ -1,13 +1,14 @@
+import './index.scss';
+
 import React, { ReactElement, useEffect, useState } from 'react';
 import JSONEditor, { EditableNode, JSONEditorMode } from 'jsoneditor';
-import 'jsoneditor/dist/jsoneditor.css';
 
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { updateNodes } from '../reducers/pathSlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { updateNodes } from '../../reducers/pathSlice';
 import {
   selectDisabled as selectBrowserDisabled,
   selectJson,
-} from '../reducers/browserSlice';
+} from '../../reducers/browserSlice';
 
 const JsonBrowser = (): ReactElement => {
   const dispatch = useAppDispatch();

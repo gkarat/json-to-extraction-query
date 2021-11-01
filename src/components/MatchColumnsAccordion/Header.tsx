@@ -1,5 +1,3 @@
-import styles from '../StepsAccordion/Header.module.css';
-
 import HintIcon from '../../public/hint.svg';
 import MarkIcon from '../../public/mark.svg';
 import { AccordionButton } from '@reach/accordion';
@@ -23,7 +21,6 @@ import { selectJsonPath } from '../../reducers/pathSlice';
 
 const MatchColumnsHeader = (): ReactElement => {
   const dispatch = useAppDispatch();
-  const data = useAppSelector(selectJson);
   const columns = useAppSelector(selectColumns);
   const open = useAppSelector(selectOpen);
   const jsonPath = useAppSelector(selectJsonPath);
@@ -57,27 +54,20 @@ const MatchColumnsHeader = (): ReactElement => {
   };
 
   return (
-    <div className={styles.accHeader}>
+    <div className="step-header">
       <div>
-        <div className={styles.left}>
-          <AccordionButton className={styles.accordionButton}>
-            <i
-              className={`${styles.arrow} ${
-                open ? styles.arrowDown : styles.arrowRight
-              }`}
-            />
+        <div className="left">
+          <AccordionButton className="accordion-button">
+            <i className={`arrow ${open ? 'arrow--down' : 'arrow--right'}`} />
           </AccordionButton>
           <h2>Step 2: Match columns</h2>
-          <img
-            className={`${styles.hint}` + (!completed ? ' hidden' : '')}
-            src={MarkIcon}
-          />
+          <img className={`${!completed ? ' hidden' : ''}`} src={MarkIcon} />
         </div>
       </div>
-      <div className={styles.actions}>
+      <div className="actions">
         <details data-popover="down">
-          <summary className={styles.hintSummary}>
-            <img className={styles.hint} src={HintIcon} />
+          <summary className="hint-summary">
+            <img className="hint" src={HintIcon} />
           </summary>
           <div>
             <p>Add or remove columns.</p>
@@ -88,20 +78,10 @@ const MatchColumnsHeader = (): ReactElement => {
             </p>
           </div>
         </details>
-        <button
-          className={styles.reset}
-          type="reset"
-          onClick={onReset}
-          disabled={!notEmpty}
-        >
+        <button type="reset" onClick={onReset} disabled={!notEmpty}>
           Reset
         </button>
-        <button
-          className={styles.preview}
-          type="button"
-          onClick={onPreview}
-          disabled={!completed}
-        >
+        <button type="button" onClick={onPreview} disabled={!completed}>
           Preview result
         </button>
       </div>

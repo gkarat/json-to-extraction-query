@@ -1,5 +1,3 @@
-import styles from './Main.module.css';
-
 import React, { FC } from 'react';
 
 import { onFinishFunction, OutputQuery } from '../App';
@@ -35,7 +33,7 @@ const Actions: FC<ActionsProps> = ({ onFinish }) => {
   };
 
   return (
-    <div className={styles.actionsMenu}>
+    <div className="actions-menu">
       <button onClick={onCopy}>Copy result query</button>
       <button onClick={onFinishApp}>Finish</button>
     </div>

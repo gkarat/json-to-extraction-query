@@ -1,4 +1,4 @@
-import styles from '../StepsAccordion/index.module.css';
+import './index.scss';
 
 import React, { ReactElement } from 'react';
 import { AccordionItem, AccordionPanel } from '@reach/accordion';
@@ -8,7 +8,7 @@ import MatchColumnsContent from './Content';
 
 const MatchColumnsAccordion = (): ReactElement => {
   return (
-    <div className={styles.stepContainer} id="match-columns-accordion">
+    <div className="step-container" id="match-columns-accordion">
       <AccordionItem>
         <MatchColumnsHeader />
         <AccordionPanel>

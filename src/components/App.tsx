@@ -1,3 +1,5 @@
+import './App.scss';
+
 import React, { FC } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';
@@ -22,9 +24,11 @@ interface AppProps {
 
 const App: FC<AppProps> = ({ json = null, onFinish }) => {
   return (
-    <Provider store={store}>
-      <Main json={json} onFinish={onFinish} />
-    </Provider>
+    <div id="json-to-extraction-query">
+      <Provider store={store}>
+        <Main json={json} onFinish={onFinish} />
+      </Provider>
+    </div>
   );
 };
 

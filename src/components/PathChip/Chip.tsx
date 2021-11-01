@@ -1,4 +1,4 @@
-import styles from './Chip.module.css';
+import './index.scss';
 
 import React from 'react';
 
@@ -16,13 +16,12 @@ const Chip = ({
   editable = true,
 }: ChipProps): React.ReactElement<ChipProps> => {
   return (
-    <div className={styles.chip}>
+    <div className="chip">
       <input
         list="chip-options"
         name="chip"
         value={value}
         onInput={onEdit}
-        className={styles.input}
         type="search"
       />
       <datalist id="chip-options">
@@ -34,7 +33,7 @@ const Chip = ({
         name="delete-chip"
         disabled={!onDelete || !editable}
         onClick={onDelete}
-        className={styles.delete}
+        className="delete"
       >
         X
       </button>

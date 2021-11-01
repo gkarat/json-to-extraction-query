@@ -1,0 +1,34 @@
+#json-to-extraction-query {
+  .content-container {
+    min-height: 200px;
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .chip-container {
+      display: flex;
+      align-items: center;
+    }
+    .add-button {
+      background-color: #d1d1d1 !important;
+      height: 37px;
+      width: 37px;
+      padding: 0 !important;
+
+      &:hover {
+        background: rgb(153, 153, 153);
+      }
+      & > img {
+        margin: auto;
+        width: 15px;
+      }
+    }
+  }
+  .secondary-text {
+    color: #565656;
+    margin-top: 1rem;
+  }
+}

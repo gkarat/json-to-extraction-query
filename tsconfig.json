@@ -14,7 +14,7 @@
     },
     "include": [
         "./src/**/*",
-        "./styles.d.ts"
+        "svg.d.ts"
     ],
     "exclude": ["node_modules"],
 }

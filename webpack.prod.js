@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // build a library (TODO: support prod build of entire app)
 const config = {
@@ -30,8 +31,8 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.(scss|css)$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.svg$/,
@@ -48,6 +49,7 @@ const config = {
       analyzerMode: 'static',
       openAnalyzer: false,
     }),
+    new MiniCssExtractPlugin()
   ],
   optimization: {
     minimize: false,

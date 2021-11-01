@@ -1,5 +1,3 @@
-import styles from './index.module.css';
-
 import React, { ReactElement, useEffect, useState } from 'react';
 import { JSONPath } from 'jsonpath-plus';
 
@@ -11,7 +9,7 @@ import {
   updateNodes,
 } from '../../reducers/pathSlice';
 import { selectJson } from '../../reducers/browserSlice';
-import Chip from '../Chip/Chip';
+import Chip from '../PathChip/Chip';
 import CrossIcon from '../../public/cross.svg';
 
 const MatchObjectsContent = (): ReactElement => {
@@ -28,10 +26,10 @@ const MatchObjectsContent = (): ReactElement => {
 
   return (
     <div className="step-content">
-      <div className={styles.contentContainer}>
-        <div className={styles.chips}>
+      <div className="content-container">
+        <div className="chips">
           {pathNodes.map((n, i) => (
-            <div className={styles.chipContainer} key={i}>
+            <div className="chip-container" key={i}>
               <Chip
                 value={String(n)}
                 onEdit={(e) => {
@@ -55,7 +53,7 @@ const MatchObjectsContent = (): ReactElement => {
             </div>
           ))}
           <button
-            className={styles.addButton}
+            className="add-button"
             name="add-chip"
             onClick={(e) => {
               e.preventDefault();
@@ -66,7 +64,7 @@ const MatchObjectsContent = (): ReactElement => {
           </button>
         </div>
       </div>
-      <div className={styles.secondaryText}>
+      <div className="secondary-text">
         <span className="small-text">
           Matched <strong>{path === '$.' ? 0 : totalMatch}</strong> items.
           <br />

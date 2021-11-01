@@ -1,0 +1,34 @@
+@import url('jsoneditor/dist/jsoneditor.css');
+
+#json-to-extraction-query {
+  #app-json-browser {
+    * {
+      border: none;
+    }
+    .jsoneditor-expand-all,
+    .jsoneditor-collapse-all {
+      filter: brightness(0) saturate(100%);
+    }
+    .jsoneditor-menu {
+      background-color: transparent;
+      height: 50px;
+      display: flex;
+      align-items: center;
+    }
+    .jsoneditor-outer {
+      height: 95%;
+    }
+    .jsoneditor-tree {
+      border-radius: 10px;
+    }
+    .jsoneditor-results {
+      color: black;
+    }
+    .jsoneditor-frame {
+      border-radius: 5px;
+      padding: 0.2rem 1rem;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

@@ -1,5 +1,3 @@
-import styles from './Content.module.css';
-
 import React, { FC } from 'react';
 
 import {
@@ -20,15 +18,14 @@ const MatchColumnsContent: FC = () => {
 
   return (
     <div className="step-content">
-      <div className={styles.activeColumns}>
+      <div className="active-columns">
         {columns.map((c: Column, i: number) => (
-          <div key={i} className={styles.columnRow}>
-            <div className={styles.columnName}>
+          <div key={i} className="column-row">
+            <div className="column-name">
               <strong>Name</strong>{' '}
               <input
                 name="column-name"
                 value={c.name}
-                className={styles.input}
                 type="text"
                 onChange={(event) => {
                   event.preventDefault();
@@ -39,12 +36,11 @@ const MatchColumnsContent: FC = () => {
                 placeholder="column name"
               />
             </div>
-            <div className={styles.columnPath}>
+            <div className="column-path">
               <strong>Path</strong>{' '}
               <input
                 name="column-path"
                 value={c.path}
-                className={styles.input}
                 type="text"
                 onChange={(event) => {
                   event.preventDefault();
@@ -56,7 +52,7 @@ const MatchColumnsContent: FC = () => {
               />
             </div>
             <button
-              className={styles.removeRow}
+              className="remove-row"
               onClick={(e) => {
                 e.preventDefault();
                 const updated = [...columns];
@@ -68,18 +64,18 @@ const MatchColumnsContent: FC = () => {
             </button>
           </div>
         ))}
-        <button
-          className={styles.addButton}
-          name="add-column"
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch(updateColumns([...columns, { name: '', path: '' }]));
-          }}
-          disabled={!enable}
-        >
-          <img src={CrossIcon}></img>
-        </button>
       </div>
+      <button
+        className="add-button"
+        name="add-column"
+        onClick={(e) => {
+          e.preventDefault();
+          dispatch(updateColumns([...columns, { name: '', path: '' }]));
+        }}
+        disabled={!enable}
+      >
+        <img src={CrossIcon}></img>
+      </button>
     </div>
   );
 };

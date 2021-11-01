@@ -1,5 +1,4 @@
 import './index.scss';
-import styles from './Main.module.css';
 
 import React, { FC, useEffect } from 'react';
 
@@ -24,12 +23,12 @@ const Main: FC<MainProps> = ({ json, onFinish }) => {
   }, [json]);
 
   return (
-    <main id="json-to-extraction-query">
-      <div id="app-grid" className={styles.mainGrid}>
-        <div id="app-json-browser" className={styles.browserContainer}>
+    <main>
+      <div id="app-grid" className="main-grid">
+        <div id="app-json-browser" className="browser-container">
           <JsonBrowser />
         </div>
-        <div id="app-steps" className={styles.stepsContainer}>
+        <div id="app-steps" className="steps-container">
           <StepsAccordion />
           <Actions onFinish={onFinish} />
         </div>

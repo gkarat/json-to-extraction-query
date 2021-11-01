@@ -1,0 +1,53 @@
+#json-to-extraction-query {
+  .active-columns {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+
+    .column-row {
+      display: flex;
+      background: #d1d1d1;
+      padding: 5px;
+      border-radius: 5px;
+      gap: 10px;
+      width: min-content;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .column-name,
+      .column-path {
+        background: #f0f0f0;
+        padding: 5px 20px;
+        border-radius: 5px;
+        min-width: 300px;
+
+        input {
+          background: transparent;
+          outline: none;
+          border: none;
+          padding: 3px;
+        }
+      }
+      .remove-row {
+        background-color: transparent !important;
+      }
+    }
+  }
+  .add-button {
+    background-color: #d1d1d1 !important;
+    height: 37px;
+    width: 37px;
+    padding: 0 !important;
+
+    &:hover {
+      background: rgb(153, 153, 153);
+    }
+    & > img {
+      margin: auto;
+      width: 15px;
+    }
+  }
+}

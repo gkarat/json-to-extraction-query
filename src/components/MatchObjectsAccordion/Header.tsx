@@ -1,5 +1,3 @@
-import styles from '../StepsAccordion/Header.module.css';
-
 import React, { ReactElement } from 'react';
 import { JSONPath } from 'jsonpath-plus';
 import { AccordionButton } from '@reach/accordion';
@@ -43,27 +41,23 @@ const MatchObjectsHeader = (): ReactElement => {
   };
 
   return (
-    <div className={styles.accHeader}>
+    <div className="step-header">
       <div>
-        <div className={styles.left}>
-          <AccordionButton className={styles.accordionButton}>
-            <i
-              className={`${styles.arrow} ${
-                open ? styles.arrowDown : styles.arrowRight
-              }`}
-            />
+        <div className="left">
+          <AccordionButton className="accordion-button">
+            <i className={`arrow ${open ? 'arrow--down' : 'arrow--right'}`} />
           </AccordionButton>
           <h2>Step 1: Match objects</h2>
           <img
-            className={`${styles.hint}` + (!completed ? ' hidden' : '')}
+            className={`hint` + (!completed ? ' hidden' : '')}
             src={MarkIcon}
           />
         </div>
       </div>
-      <div className={styles.actions}>
+      <div className="actions">
         <details data-popover="down">
-          <summary className={styles.hintSummary}>
-            <img className={styles.hint} src={HintIcon} />
+          <summary className="hint-summary">
+            <img className="hint" src={HintIcon} />
           </summary>
           <div>
             <p>
@@ -78,7 +72,7 @@ const MatchObjectsHeader = (): ReactElement => {
           </div>
         </details>
         <button
-          className={styles.reset}
+          className="reset"
           type="reset"
           onClick={onReset}
           disabled={!notEmpty}
@@ -86,7 +80,7 @@ const MatchObjectsHeader = (): ReactElement => {
           Reset
         </button>
         <button
-          className={styles.preview}
+          className="preview"
           type="button"
           onClick={onPreview}
           disabled={!notEmpty}
