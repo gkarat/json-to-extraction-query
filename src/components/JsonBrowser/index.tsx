@@ -20,27 +20,6 @@ const JsonBrowser = (): ReactElement => {
 
   const options = {
     mode: 'view' as JSONEditorMode,
-    name: '3976d107-a45e-49fb-935b-1926f16cfd87',
-    /* 
-    onClassName: ({ path, field, value }) => {
-      if (
-        Array.isArray(path) &&
-        Array.isArray(pathNodes) &&
-        path.length === pathNodes.length &&
-        pathNodes.every((val, index) => val === path[index])
-      ) {
-        // console.log(path)
-        return 'test';
-      }
-      return undefined;
-    },
-    onTextSelectionChange: (
-      start: SelectionPosition,
-      end: SelectionPosition,
-      text: string
-    ) => {
-      // console.log(start, end, text);
-    }, */
     onEvent: (node: EditableNode, event: any) => {
       if (!disabled && event.type === 'click') {
         dispatch(updateNodes(node.path));
