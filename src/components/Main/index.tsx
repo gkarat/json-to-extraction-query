@@ -1,3 +1,4 @@
+import './index.scss';
 import styles from './Main.module.css';
 
 import React, { FC, useEffect } from 'react';
@@ -23,7 +24,7 @@ const Main: FC<MainProps> = ({ json, onFinish }) => {
   }, [json]);
 
   return (
-    <main className={styles.main}>
+    <main id="json-to-extraction-query">
       <div id="app-grid" className={styles.mainGrid}>
         <div id="app-json-browser" className={styles.browserContainer}>
           <JsonBrowser />

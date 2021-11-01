@@ -1,5 +1,3 @@
-import '../index.css';
-
 import React, { FC } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';

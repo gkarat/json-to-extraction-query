@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+#json-to-extraction-query {
+  background-color: #f0f0f0;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
+  gap: 1rem;
+}
+
+.browserContainer {
+  grid-area: 1 / 1 / 3 / 2;
+  overflow: auto;
+  max-height: 100%;
+  resize: horizontal;
+  padding: 1rem 0 1rem 1rem;
+}
+
+.stepsContainer {
+  grid-area: 1 / 2 / 3 / 3;
+  position: relative;
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.actionsMenu {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  background-color: white;
+  padding: 1rem 1rem 1rem 0;
+  border-radius: 10px;
+}
+
+#json-to-extraction-query * {
+  font-family: 'Roboto' !important;
+  transition: 0.05s;
+}
+#app,
+#json-to-extraction-query,
+#json-to-extraction-query > div {
+  height: 100%;
+}
+.jsoneditor-field {
+  cursor: pointer;
+}
+
+#app-steps button {
+  display: flex;
+  align-items: flex-start;
+  padding: 5px 15px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 12pt;
+}
+#app-steps button:hover {
+  background: rgb(196, 196, 196);
+}
+#app-steps .hidden {
+  display: none;
+}
+
+.step-content {
+  padding: 1rem 0 2rem 2rem;
+}
+
+/* popover */
+#json-to-extraction-query details[data-popover] {
+  display: inline;
+  position: relative;
+}
+
+#json-to-extraction-query details[data-popover] > summary {
+  list-style: none;
+}
+#json-to-extraction-query details[data-popover] > summary + * {
+  position: absolute;
+  display: block;
+  z-index: 1;
+  border: solid 1px #d1d1d1;
+  border-radius: 5%;
+  padding: 0 20px;
+  background: white;
+  width: 300px;
+}
+#json-to-extraction-query details[data-popover] > * + * {
+  /* hide detail elements that would ruin the popover */
+  display: none;
+}
+#json-to-extraction-query details[data-popover='up'] > summary + * {
+  bottom: calc(0.5rem + 100%);
+  right: 50%;
+  transform: translateX(50%);
+}
+#json-to-extraction-query details[data-popover='down'] > summary + * {
+  top: calc(0.5rem + 100%);
+  right: 50%;
+  transform: translateX(50%);
+}
+#json-to-extraction-query details[data-popover='left'] > summary + * {
+  right: calc(1rem + 100%);
+  bottom: 50%;
+  transform: translateY(50%);
+}
+#json-to-extraction-query details[data-popover='right'] > summary + * {
+  left: calc(1rem + 100%);
+  bottom: 50%;
+  transform: translateY(50%);
+}
+
+#app-json-browser .jsoneditor-menu {
+  background-color: transparent;
+}
+
+#app-json-browser * {
+  border: none;
+}
+
+#app-json-browser .jsoneditor-expand-all,
+#app-json-browser .jsoneditor-collapse-all {
+  filter: brightness(0) saturate(100%);
+}
+
+#app-json-browser .jsoneditor-menu {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+#app-json-browser .jsoneditor-outer {
+  height: 95%;
+}
+
+#app-json-browser .jsoneditor-results {
+  color: black;
+}
+
+#app-json-browser .jsoneditor-frame {
+  border-radius: 5px;
+  padding: 0.2rem 1rem;
+  display: flex;
+  align-items: center;
+}
