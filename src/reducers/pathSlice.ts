@@ -7,7 +7,7 @@ type PathNodes = Array<string | number>;
 interface PathState {
   nodes: PathNodes;
   jsonPath: string;
-  submitted: boolean;
+  previewed: boolean;
   // stands for collapsing related accordion item
   open: boolean;
 }
@@ -15,14 +15,16 @@ interface PathState {
 export const initialState: PathState = {
   nodes: [],
   jsonPath: '$.',
-  submitted: false,
+  previewed: false,
   open: true,
 };
 
 export const fromNodesToJsonPath = (nodes: PathNodes): string => {
   return (
     '$.' +
-    nodes.map((n) => ((n as string).includes('.') ? `[${n}]` : n)).join('.')
+    nodes
+      .map((n) => (typeof n === 'number' ? n : n.includes('.') ? `[${n}]` : n))
+      .join('.')
   );
 };
 
@@ -34,11 +36,8 @@ export const pathSlice = createSlice({
       state.nodes = action.payload;
       state.jsonPath = fromNodesToJsonPath(action.payload);
     },
-    submitPath: (state) => {
-      state.submitted = true;
-    },
-    deferPath: (state) => {
-      state.submitted = false;
+    updatePreviewed: (state, action: PayloadAction<boolean>) => {
+      state.previewed = action.payload;
     },
     resetPath: (state) => {
       Object.assign(state, initialState);
@@ -50,14 +49,14 @@ export const pathSlice = createSlice({
 });
 
 // actions
-export const { updateNodes, submitPath, deferPath, resetPath, toggleOpen } =
+export const { updateNodes, updatePreviewed, resetPath, toggleOpen } =
   pathSlice.actions;
 
 // selectors
 export const selectJsonPath = (state: RootState): string => state.path.jsonPath;
 export const selectNodes = (state: RootState): PathNodes => state.path.nodes;
-export const selectSubmitted = (state: RootState): boolean =>
-  state.path.submitted;
+export const selectPreviewed = (state: RootState): boolean =>
+  state.path.previewed;
 export const selectOpen = (state: RootState): boolean => state.path.open;
 
 // reducer

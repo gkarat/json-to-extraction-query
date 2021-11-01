@@ -1,31 +1,33 @@
 import styles from './index.module.css';
-import CrossIcon from '../../public/cross.svg';
+
 import React, { ReactElement, useEffect, useState } from 'react';
 import { JSONPath } from 'jsonpath-plus';
+
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
   selectJsonPath,
   selectNodes,
-  selectSubmitted,
+  selectPreviewed,
   updateNodes,
 } from '../../reducers/pathSlice';
 import { selectJson } from '../../reducers/browserSlice';
 import Chip from '../Chip/Chip';
+import CrossIcon from '../../public/cross.svg';
 
 const MatchObjectsContent = (): ReactElement => {
   const dispatch = useAppDispatch();
   const pathNodes = useAppSelector(selectNodes);
   const path = useAppSelector(selectJsonPath);
-  const pathSubmitted = useAppSelector(selectSubmitted);
   const data = useAppSelector(selectJson);
+  const previewed = useAppSelector(selectPreviewed);
   const [totalMatch, setTotalMatch] = useState(0);
 
   useEffect(() => {
-    setTotalMatch(JSONPath({ path, json: data })?.length || 0);
+    !previewed && setTotalMatch(JSONPath({ path, json: data })?.length || 0);
   }, [path, data]);
 
   return (
-    <div>
+    <div className="step-content">
       <div className={styles.contentContainer}>
         <div className={styles.chips}>
           {pathNodes.map((n, i) => (
@@ -44,7 +46,6 @@ const MatchObjectsContent = (): ReactElement => {
                   nodes.splice(i, 1);
                   dispatch(updateNodes(nodes));
                 }}
-                editable={!pathSubmitted}
               />
               {pathNodes.length !== 1 && i !== pathNodes.length - 1 ? (
                 <span>/</span>

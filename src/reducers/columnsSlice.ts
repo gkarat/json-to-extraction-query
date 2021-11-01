@@ -2,17 +2,23 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from '../store/store';
 
-type ColumnPaths = Array<string>;
+type ColumnPath = string;
+type ColumnName = string;
+
+export type Column = {
+  path: ColumnPath;
+  name: ColumnName;
+};
 
 interface ColumnsState {
-  paths: ColumnPaths;
-  submitted: boolean;
+  columns: Column[];
+  previewed: boolean;
   open: boolean;
 }
 
 export const initialState: ColumnsState = {
-  paths: [],
-  submitted: false,
+  columns: [],
+  previewed: true,
   open: false,
 };
 
@@ -20,14 +26,11 @@ export const columnsSlice = createSlice({
   name: 'columns',
   initialState,
   reducers: {
-    updateColumns: (state, action: PayloadAction<ColumnPaths>) => {
-      state.paths = action.payload;
+    updateColumns: (state, action: PayloadAction<Column[]>) => {
+      state.columns = action.payload;
     },
-    submitColumns: (state) => {
-      state.submitted = true;
-    },
-    deferColumns: (state) => {
-      state.submitted = false;
+    updatePreviewed: (state, action: PayloadAction<boolean>) => {
+      state.previewed = action.payload;
     },
     resetColumns: (state) => {
       Object.assign(state, initialState);
@@ -39,19 +42,18 @@ export const columnsSlice = createSlice({
 });
 
 // actions
-export const {
-  updateColumns,
-  submitColumns,
-  deferColumns,
-  resetColumns,
-  toggleOpen,
-} = columnsSlice.actions;
+export const { updateColumns, updatePreviewed, resetColumns, toggleOpen } =
+  columnsSlice.actions;
 
 // selectors
-export const selectColumnsPaths = (state: RootState): ColumnPaths =>
-  state.columns.paths;
-export const selectColumnsSubmitted = (state: RootState): boolean =>
-  state.columns.submitted;
+export const selectColumns = (state: RootState): Column[] =>
+  state.columns.columns;
+export const selectNames = (state: RootState): ColumnName[] =>
+  state.columns.columns.map((c) => c.name);
+export const selectPaths = (state: RootState): ColumnPath[] =>
+  state.columns.columns.map((c) => c.path);
+export const selectPreviewed = (state: RootState): boolean =>
+  state.columns.previewed;
 export const selectOpen = (state: RootState): boolean => state.columns.open;
 
 // reducer

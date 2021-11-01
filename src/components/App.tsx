@@ -7,23 +7,23 @@ import { JsonData } from '../reducers/browserSlice';
 
 import Main from './Main';
 
-type OutputQuery = {
+export type OutputQuery = {
   path: string;
   columnPaths: string[];
   columnNames: string[];
 };
 
-type onFinishFunction = (query: OutputQuery) => void;
+export type onFinishFunction = (query: OutputQuery) => void;
 
 interface AppProps {
   json?: JsonData;
   onFinish: onFinishFunction;
 }
 
-const App: FC<AppProps> = ({ json = null }) => {
+const App: FC<AppProps> = ({ json = null, onFinish }) => {
   return (
     <Provider store={store}>
-      <Main json={json} />
+      <Main json={json} onFinish={onFinish} />
     </Provider>
   );
 };

@@ -7,12 +7,15 @@ import { initJson, JsonData } from '../../reducers/browserSlice';
 
 import JsonBrowser from '../JsonBrowser';
 import StepsAccordion from '../StepsAccordion';
+import Actions from './Actions';
+import { onFinishFunction } from '../App';
 
 interface MainProps {
   json: JsonData;
+  onFinish: onFinishFunction;
 }
 
-const Main: FC<MainProps> = ({ json }) => {
+const Main: FC<MainProps> = ({ json, onFinish }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,13 +23,14 @@ const Main: FC<MainProps> = ({ json }) => {
   }, [json]);
 
   return (
-    <main>
+    <main className={styles.main}>
       <div id="app-grid" className={styles.mainGrid}>
         <div id="app-json-browser" className={styles.browserContainer}>
           <JsonBrowser />
         </div>
         <div id="app-steps" className={styles.stepsContainer}>
           <StepsAccordion />
+          <Actions onFinish={onFinish} />
         </div>
       </div>
     </main>

@@ -1,4 +1,4 @@
-import styles from '../StepsAccordion/StepsAccordion.module.css';
+import styles from '../StepsAccordion/Header.module.css';
 
 import React, { ReactElement } from 'react';
 import { JSONPath } from 'jsonpath-plus';
@@ -13,6 +13,7 @@ import {
   selectJsonPath,
   selectNodes,
   selectOpen,
+  updatePreviewed,
 } from '../../reducers/pathSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
@@ -30,12 +31,14 @@ const MatchObjectsHeader = (): ReactElement => {
 
   // remove path nodes and refresh json browser
   const onReset = () => {
+    dispatch(updatePreviewed(false));
     dispatch(resetPath());
     dispatch(resetJson());
   };
 
   // execute JSONPath parser and refresh json browser with the result
   const onPreview = () => {
+    dispatch(updatePreviewed(true));
     dispatch(updateJson(JSONPath({ path: jsonPath, json: browserJson })));
   };
 

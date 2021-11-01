@@ -1,6 +1,11 @@
 .mainGrid {
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
+  gap: 1rem;
+}
+
+.main {
+  background-color: #f0f0f0;
 }
 
 .browserContainer {
@@ -8,11 +13,23 @@
   overflow: auto;
   max-height: 100%;
   resize: horizontal;
-  padding: 1rem;
+  padding: 1rem 0 1rem 1rem;
 }
 
 .stepsContainer {
   grid-area: 1 / 2 / 3 / 3;
   position: relative;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.actionsMenu {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  background-color: white;
+  padding: 1rem 1rem 1rem 0;
+  border-radius: 10px;
 }

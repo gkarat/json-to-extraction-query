@@ -27,12 +27,17 @@ main > div {
   border: none;
   outline: none;
   cursor: pointer;
+  font-size: 12pt;
 }
 #app-steps button:hover {
   background: rgb(196, 196, 196);
 }
 #app-steps .hidden {
   display: none;
+}
+
+.step-content {
+  padding: 1rem 0 2rem 2rem;
 }
 
 /* popover */
@@ -77,4 +82,38 @@ details[data-popover='right'] > summary + * {
   left: calc(1rem + 100%);
   bottom: 50%;
   transform: translateY(50%);
+}
+
+#app-json-browser .jsoneditor-menu {
+  background-color: transparent;
+}
+
+#app-json-browser * {
+  border: none;
+}
+
+#app-json-browser .jsoneditor-expand-all,
+#app-json-browser .jsoneditor-collapse-all {
+  filter: brightness(0) saturate(100%);
+}
+
+#app-json-browser .jsoneditor-menu {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+#app-json-browser .jsoneditor-outer {
+  height: 95%;
+}
+
+#app-json-browser .jsoneditor-results {
+  color: black;
+}
+
+#app-json-browser .jsoneditor-frame {
+  border-radius: 5px;
+  padding: 0.2rem 1rem;
+  display: flex;
+  align-items: center;
 }

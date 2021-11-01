@@ -57,6 +57,8 @@ export const {
 // selectors
 export const selectJson = (state: RootState): JsonData =>
   state.browser.currentJson;
+export const selectInitJson = (state: RootState): JsonData =>
+  state.browser.initJson;
 export const selectDisabled = (state: RootState): boolean =>
   state.browser.disabled;
 

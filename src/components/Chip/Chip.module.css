@@ -14,7 +14,9 @@ input {
   border-radius: 5px;
   margin-right: 0.5rem;
 }
-
+.chip > input {
+  padding: 0.5rem;
+}
 .delete {
   padding: 10px;
   border-radius: 5px;

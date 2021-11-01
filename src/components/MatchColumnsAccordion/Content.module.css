@@ -1,0 +1,56 @@
+.activeColumns {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.columnRow {
+  display: flex;
+  background: #d1d1d1;
+  padding: 5px;
+  border-radius: 5px;
+  gap: 10px;
+  width: min-content;
+  align-items: center;
+}
+
+.columnName,
+.columnPath {
+  background: #f0f0f0;
+  padding: 5px 20px;
+  border-radius: 5px;
+  min-width: 300px;
+}
+
+.columnName {
+}
+
+.columnPath {
+}
+
+.removeRow {
+  background-color: transparent !important;
+}
+
+input {
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 3px;
+}
+
+.addButton {
+  background-color: #d1d1d1 !important;
+  height: 37px;
+  width: 37px;
+  padding: 0 !important;
+}
+
+.addButton:hover {
+  background: rgb(153, 153, 153);
+}
+
+.addButton > img {
+  margin: auto;
+  width: 15px;
+}
