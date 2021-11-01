@@ -36,10 +36,15 @@
   .actions-menu {
     display: flex;
     gap: 15px;
-    justify-content: flex-end;
+    justify-content: space-between;
     background-color: white;
-    padding: 1rem 1rem 1rem 0;
+    padding: 1rem;
     border-radius: 10px;
+
+    &__right {
+      display: flex;
+      gap: 15px;
+    }
   }
   .jsoneditor-field {
     cursor: pointer;
@@ -58,6 +63,14 @@
 
       &:hover {
         background: rgb(196, 196, 196);
+      }
+
+      &[disabled] {
+        cursor: auto;
+
+        &:hover {
+          background: #f0f0f0;
+        }
       }
     }
     .hidden {

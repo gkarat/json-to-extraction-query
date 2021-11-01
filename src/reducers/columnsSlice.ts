@@ -18,7 +18,7 @@ interface ColumnsState {
 
 export const initialState: ColumnsState = {
   columns: [],
-  previewed: true,
+  previewed: false,
   open: false,
 };
 

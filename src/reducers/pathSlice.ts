@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from '../store/store';
 
-type PathNodes = Array<string | number>;
+export type PathNodes = Array<string | number>;
 
 interface PathState {
   nodes: PathNodes;

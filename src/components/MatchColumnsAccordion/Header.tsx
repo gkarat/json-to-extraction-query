@@ -3,31 +3,31 @@ import MarkIcon from '../../public/mark.svg';
 import { AccordionButton } from '@reach/accordion';
 import { JSONPath } from 'jsonpath-plus';
 import React, { ReactElement } from 'react';
-import {
-  selectInitJson,
-  selectJson,
-  updateJson,
-} from '../../reducers/browserSlice';
+import { selectInitJson, updateJson } from '../../reducers/browserSlice';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
-  Column,
   resetColumns,
   selectColumns,
   selectOpen,
   updatePreviewed,
 } from '../../reducers/columnsSlice';
-import { selectJsonPath } from '../../reducers/pathSlice';
+import { selectJsonPath, selectNodes } from '../../reducers/pathSlice';
+import {
+  columnsCorrect,
+  columnsNotEmpty,
+  pathCorrect,
+} from '../../helpers/helpers';
 
 const MatchColumnsHeader = (): ReactElement => {
   const dispatch = useAppDispatch();
   const columns = useAppSelector(selectColumns);
   const open = useAppSelector(selectOpen);
   const jsonPath = useAppSelector(selectJsonPath);
+  const jsonPathNodes = useAppSelector(selectNodes);
   const initJson = useAppSelector(selectInitJson);
-
-  const notEmpty = columns?.length > 0;
-  const completed = notEmpty && columns.every((n: Column) => n.path.length > 0);
+  const notEmpty = columnsNotEmpty(columns);
+  const completed = pathCorrect(jsonPathNodes) && columnsCorrect(columns);
 
   // remove path nodes and refresh json browser
   const onReset = () => {

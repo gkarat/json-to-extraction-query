@@ -14,6 +14,7 @@ import {
   updatePreviewed,
 } from '../../reducers/pathSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { pathCorrect, pathNonEmpty } from '../../helpers/helpers';
 
 const MatchObjectsHeader = (): ReactElement => {
   const jsonPath = useAppSelector(selectJsonPath);
@@ -21,10 +22,8 @@ const MatchObjectsHeader = (): ReactElement => {
   const browserJson = useAppSelector(selectJson);
   const open = useAppSelector(selectOpen);
 
-  const notEmpty = jsonPathNodes?.length > 0;
-  const completed =
-    notEmpty &&
-    jsonPathNodes.every((n) => typeof n === 'number' || n.length > 0);
+  const notEmpty = pathNonEmpty(jsonPathNodes);
+  const completed = pathCorrect(jsonPathNodes);
   const dispatch = useAppDispatch();
 
   // remove path nodes and refresh json browser
