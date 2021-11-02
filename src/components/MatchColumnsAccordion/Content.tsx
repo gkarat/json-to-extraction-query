@@ -64,18 +64,18 @@ const MatchColumnsContent: FC = () => {
             </button>
           </div>
         ))}
+        <button
+          className="add-button"
+          name="add-column"
+          onClick={(e) => {
+            e.preventDefault();
+            dispatch(updateColumns([...columns, { name: '', path: '' }]));
+          }}
+          disabled={!enable}
+        >
+          <img src={CrossIcon}></img>
+        </button>
       </div>
-      <button
-        className="add-button"
-        name="add-column"
-        onClick={(e) => {
-          e.preventDefault();
-          dispatch(updateColumns([...columns, { name: '', path: '' }]));
-        }}
-        disabled={!enable}
-      >
-        <img src={CrossIcon}></img>
-      </button>
     </div>
   );
 };
